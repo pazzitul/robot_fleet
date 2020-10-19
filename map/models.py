@@ -26,6 +26,7 @@ class PointTypeModel(models.Model):
     class Meta:
         db_table = 'fleet_point_type'
 
+
 class AreaModel(models.Model):
     """@Model class of Area
     """
@@ -34,7 +35,7 @@ class AreaModel(models.Model):
         db_table = 'fleet_area'
 
 
-class AreaModelType(models.Model):
+class AreaTypeModel(models.Model):
     """@Model class of Area Type
     """
 
