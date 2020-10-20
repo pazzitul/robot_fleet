@@ -1,5 +1,5 @@
 class Point(object):
-    """@Describe 3d double value point
+    """Describe 3d double value point
 
     Attributes:
     x:
@@ -14,7 +14,7 @@ class Point(object):
 
 
 class Vector3d(object):
-    """@Describes 3d vector
+    """Describes 3d vector
 
     Attributes:
         x:
@@ -29,7 +29,7 @@ class Vector3d(object):
 
 
 class Quaterniond(object):
-    """@Quaternion with double value
+    """Quaternion with double value
 
     Attributes:
         x:
@@ -46,7 +46,7 @@ class Quaterniond(object):
 
 
 class Pose(object):
-    """@Contains position and orientation
+    """Contains position and orientation
 
     Attributes:
         position:
@@ -59,7 +59,7 @@ class Pose(object):
 
 
 class Twist(object):
-    """@twist contains linear and angular
+    """twist contains linear and angular
 
     Attributes:
         linear:
