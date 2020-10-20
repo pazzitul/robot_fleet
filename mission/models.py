@@ -2,7 +2,7 @@ from django.db import models
 
 
 class MissionModel(models.Model):
-    """@Model class of Mission
+    """Model class of Mission
     """
 
     sn = models.CharField(max_length=64, unique=True)
@@ -15,7 +15,7 @@ class MissionModel(models.Model):
 
 
 class MissionGroupModel(models.Model):
-    """@Model class of Mission Group
+    """Model class of Mission Group
     """
 
     class Meta:
@@ -23,7 +23,7 @@ class MissionGroupModel(models.Model):
 
 
 class MissionTypeModel(models.Model):
-    """@Model class of Mission Type
+    """Model class of Mission Type
     """
 
     class Meta:

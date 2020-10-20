@@ -2,7 +2,7 @@ from django.db import models
 
 
 class MapModel(models.Model):
-    """@Model class of Map
+    """Model class of Map
     """
 
     name = models.CharField(max_length=64)
@@ -17,7 +17,7 @@ class MapModel(models.Model):
 
 
 class PointModel(models.Model):
-    """@Model class of Point
+    """Model class of Point
     """
 
     POINT_STATUS = (
@@ -37,7 +37,7 @@ class PointModel(models.Model):
 
 
 class PointTypeModel(models.Model):
-    """@Model class of Point Type
+    """Model class of Point Type
     """
 
     name = models.CharField(max_length=64)
@@ -47,7 +47,7 @@ class PointTypeModel(models.Model):
 
 
 class PointActionModel(models.Model):
-    """@Model class of Point Action
+    """Model class of Point Action
     """
 
     name = models.CharField(max_length=64)
@@ -58,7 +58,7 @@ class PointActionModel(models.Model):
 
 
 class AreaModel(models.Model):
-    """@Model class of Area
+    """Model class of Area
     """
 
     AREA_STATUS = (
@@ -77,7 +77,7 @@ class AreaModel(models.Model):
 
 
 class AreaTypeModel(models.Model):
-    """@Model class of Area Type
+    """Model class of Area Type
     """
 
     name = models.CharField(max_length=64)
@@ -87,7 +87,7 @@ class AreaTypeModel(models.Model):
 
 
 class AreaActionModel(models.Model):
-    """@Model class of Area Action
+    """Model class of Area Action
     """
 
     name = models.CharField(max_length=64)
