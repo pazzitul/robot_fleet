@@ -2,7 +2,7 @@ from django.db import models
 
 
 class RobotModel(models.Model):
-    """@Model class of Robot
+    """Model class of Robot
 
     Attributes:
         sn: Robot factory number, fixed.
@@ -35,7 +35,7 @@ class RobotModel(models.Model):
 
 
 class RobotTypeModel(models.Model):
-    """@Model class of Robot Type
+    """Model class of Robot Type
     """
 
     name = models.CharField(max_length=64)
