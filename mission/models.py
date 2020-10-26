@@ -9,6 +9,9 @@ class MissionModel(models.Model):
     name = models.CharField(max_length=128, null=True)
     group = models.ForeignKey('mission.MissionGroupModel', on_delete=models.CASCADE, null=True)
     type = models.ForeignKey('mission.MissionTypeModel', on_delete=models.CASCADE, null=True)
+    global_path = models.TextField(null=True)
+    track_path = models.TextField(null=True)
+    progress = models.IntegerField(null=True)
 
     class Meta:
         db_table = 'fleet_mission'

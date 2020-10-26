@@ -1,4 +1,5 @@
 from django.db import models
+from django_mysql.models import JSONField
 
 
 class RobotModel(models.Model):
@@ -26,8 +27,8 @@ class RobotModel(models.Model):
     map = models.ForeignKey('map.MapModel', on_delete=models.CASCADE)
     type = models.ForeignKey('robot.RobotTypeModel', on_delete=models.CASCADE)
     status = models.IntegerField(choices=ROBOT_STATUS, default=0)
-    position = models.JSONField(default={'x': 0, 'y': 0, 'z': 0})
-    orientation = models.JSONField(default={'x': 0, 'y': 0, 'z': 0, 'w': 1})
+    position = JSONField(default='{"x": 0, "y": 0, "z": 0}')
+    orientation = JSONField(default='{"x": 0, "y": 0, "z": 0, "w": 1}')
     power = models.IntegerField(default=0)
 
     class Meta:
