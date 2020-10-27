@@ -8,7 +8,6 @@ class MapModel(models.Model):
 
     name = models.CharField(max_length=64)
     description = models.CharField(max_length=128, null=True)
-    description = models.CharField(max_length=128, null=True)
     create_time = models.DateTimeField(auto_now_add=True)
     update_time = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=False)
