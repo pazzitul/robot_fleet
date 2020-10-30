@@ -2,14 +2,24 @@ from django.db import models
 from django_mysql.models import JSONField
 
 
+def get_dir_name(instance, filename):
+    """
+    FIleField prefix dir
+    """
+    return '{0}/{1}'.format(instance.name, filename)
+
+
 class MapModel(models.Model):
     """Model class of Map
     """
 
-    name = models.CharField(max_length=64)
+    name = models.CharField(max_length=64, unique=True)
     description = models.CharField(max_length=128, null=True)
     create_time = models.DateTimeField(auto_now_add=True)
     update_time = models.DateTimeField(auto_now=True)
+    png = models.FileField(upload_to=get_dir_name, blank=True)
+    yaml = models.FileField(upload_to=get_dir_name, blank=True)
+    zip = models.FileField(upload_to=get_dir_name, null=True, blank=True)
     active = models.BooleanField(default=False)
     raw = JSONField(default=dict)
 

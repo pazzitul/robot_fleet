@@ -21,6 +21,12 @@ class MapAPI(ModelViewSet):
         serializer = self.get_serializer(queryset, many=True)
         return Response(data={'code': 0, 'data': serializer.data})
 
+    def destroy(self, request, *args, **kwargs):
+        instance = self.get_object()
+        self.perform_destroy(instance)
+        queryset = self.get_queryset()
+        return Response(self.get_serializer(queryset, many=True).data)
+
 
 class PointAPI(ModelViewSet):
     queryset = PointModel
