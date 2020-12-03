@@ -27,13 +27,15 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    uid = models.UUIDField(primary_key=True)
+    userid = models.UUIDField(primary_key=True)
     username = models.CharField(max_length=64, verbose_name="Username", unique=True)
     nickname = models.CharField(max_length=64, verbose_name="Nickname", null=True, blank=True)
     phone = models.CharField(max_length=11, verbose_name="Phone Number", null=True, blank=True)
     email = models.EmailField(verbose_name="Email", null=True, blank=True)
     is_active = models.BooleanField(default=True)
     date_joined = models.DateTimeField(auto_now_add=True)
+    title = models.CharField(max_length=64, null=True)
+    avatar = models.URLField(null=True)
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']

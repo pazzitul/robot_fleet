@@ -1,4 +1,9 @@
+import os
+import shutil
+
+from django.conf import settings
 from django.db import models
+from django.dispatch import receiver
 from django_mysql.models import JSONField
 
 
@@ -106,3 +111,18 @@ class AreaActionModel(models.Model):
 
     class Meta:
         db_table = 'fleet_area_action'
+
+
+@receiver(models.signals.post_delete, sender=MapModel)
+def auto_delete_file_on_delete(sender, instance, **kwargs):
+    """
+    该函数用于前端在调用map DELETE请求时。删除数据库记录的同时删除media目录下对应的文件夹
+    :param sender:
+    :param instance:
+    :param kwargs:
+    :return:
+    """
+    if instance.name:
+        map_dir_path = settings.MEDIA_ROOT + instance.name
+        if os.path.isdir(map_dir_path):
+            shutil.rmtree(map_dir_path)

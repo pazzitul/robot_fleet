@@ -115,3 +115,9 @@ def info(request):
 
 def logout(request):
     return JsonResponse({'code': 20000, 'data': {'token': '123'}})
+
+def current_user(request):
+    return JsonResponse({'code': 20000, 'data': {'token': '123'}})
+
+def account(request):
+    return JsonResponse({'code': 20000, 'data': {'token': '123'}})
