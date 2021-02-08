@@ -1,8 +1,12 @@
+from uuid import uuid1
+
 from rest_framework.viewsets import ModelViewSet
 
-from mission.models import *
 from mission.paginations import *
 from mission.serializers import *
+from strategies.planner.planner import Planner
+from robot.models import RobotModel
+from adatper.adapter import MASTER_ADAPTER
 
 
 class MissionAPI(ModelViewSet):
@@ -19,6 +23,25 @@ class MissionAPI(ModelViewSet):
 
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
+
+    def create(self, request, *args, **kwargs):
+        robot = request.data.get('robot', None)
+        movements = request.data.get('movements', None)
+
+        _,path, raw = Planner.plan(robot, movements)
+        msg = {
+            'message_id': 1,
+            'message_type': 'movement',
+            'movements': raw
+        }
+
+        MissionModel.objects.create(global_path=path,
+                                    robot=RobotModel.objects.get(sn=robot),
+                                    raw=raw,
+                                    sn=uuid1().__str__()[0:8])
+
+        MASTER_ADAPTER.get_robot_adapter(robot).set_movements(msg)
+        return Response()
 
 
 class MissionTypeAPI(ModelViewSet):

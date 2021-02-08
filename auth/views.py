@@ -121,3 +121,6 @@ def current_user(request):
 
 def account(request):
     return JsonResponse({'code': 20000, 'data': {'token': '123'}})
+
+def me(request):
+    return JsonResponse(data={'user': {}})

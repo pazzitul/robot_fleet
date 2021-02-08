@@ -24,6 +24,7 @@ class MapFilter(django_filters.rest_framework.FilterSet):
     class Meta:
         model = MapModel
         fields = [
+            'id',
             'name',
             'active'
         ]

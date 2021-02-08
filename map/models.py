@@ -26,7 +26,11 @@ class MapModel(models.Model):
     yaml = models.FileField(upload_to=get_dir_name, blank=True)
     zip = models.FileField(upload_to=get_dir_name, null=True, blank=True)
     active = models.BooleanField(default=False)
-    raw = JSONField(default=dict)
+    width = models.IntegerField(null=True)
+    height = models.IntegerField(null=True)
+    resolution = models.FloatField(null=True)
+    origin = JSONField(default=dict)
+    raw = JSONField(default=list, null=True)
 
     class Meta:
         db_table = 'fleet_map'
@@ -40,9 +44,9 @@ class PointModel(models.Model):
         (0, 'UNAVAILABLE'),
         (1, 'AVAILABLE')
     )
-    sn = models.IntegerField()
+    # sn = models.IntegerField()
     name = models.CharField(max_length=64)
-    type = models.ForeignKey('map.PointTypeModel', on_delete=models.CASCADE)
+    # type = models.ForeignKey('map.PointTypeModel', on_delete=models.CASCADE)
     position = JSONField(default='{"x": 0, "y": 0, "z": 0}')
     orientation = JSONField(default='{"x": 0, "y": 0, "z": 0}')
     status = models.IntegerField(choices=POINT_STATUS, default=1)
@@ -81,9 +85,10 @@ class AreaModel(models.Model):
         (0, 'UNAVAILABLE'),
         (1, 'AVAILABLE')
     )
-    sn = models.IntegerField()
+
+    # sn = models.IntegerField()
     name = models.CharField(max_length=64)
-    type = models.ForeignKey('map.AreaTypeModel', on_delete=models.CASCADE)
+    type = models.ForeignKey('map.AreaTypeModel', on_delete=models.CASCADE, null=True)
     vertices = JSONField(default=dict)
     status = models.IntegerField(choices=AREA_STATUS, default=1)
     map = models.ForeignKey('map.MapModel', on_delete=models.CASCADE)
@@ -111,6 +116,24 @@ class AreaActionModel(models.Model):
 
     class Meta:
         db_table = 'fleet_area_action'
+
+
+class VirtualWallModel(models.Model):
+    """Model class of virtual wall
+    """
+
+    AREA_STATUS = (
+        (0, 'UNAVAILABLE'),
+        (1, 'AVAILABLE')
+    )
+    # sn = models.IntegerField()
+    name = models.CharField(max_length=64)
+    vertices = JSONField(default=dict)
+    status = models.IntegerField(choices=AREA_STATUS, default=1)
+    map = models.ForeignKey('map.MapModel', on_delete=models.CASCADE)
+
+    class Meta:
+        db_table = 'fleet_virtual_wall'
 
 
 @receiver(models.signals.post_delete, sender=MapModel)

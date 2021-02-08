@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
 class MissionModel(models.Model):
@@ -7,8 +9,8 @@ class MissionModel(models.Model):
 
     MISSION_STATUS = (
         (0, 'RAW'),
-        (1, 'DISPATCHABLE'),
-        (2, 'BEING_PROCESSED'),
+        (1, 'DISPATCH'),
+        (2, 'PROCESSED'),
         (3, 'FINISHED'),
         (4, 'FAILED'),
         (5, 'PAUSE'),
@@ -20,11 +22,13 @@ class MissionModel(models.Model):
     type = models.ForeignKey('mission.MissionTypeModel', on_delete=models.CASCADE, null=True)
     status = models.IntegerField(choices=MISSION_STATUS, default=0)
     create_time = models.DateTimeField(auto_now_add=True)
-    begin_time = models.DateTimeField()
-    finish_time = models.DateTimeField()
+    begin_time = models.DateTimeField(null=True)
+    finish_time = models.DateTimeField(null=True)
+    robot = models.ForeignKey('robot.RobotModel', on_delete=models.CASCADE, null=True)
+    raw = models.TextField(null=True)
     global_path = models.TextField(null=True)
     track_path = models.TextField(null=True)
-    progress = models.IntegerField(null=True)
+    progress = models.IntegerField(null=True, default=0)
 
     class Meta:
         db_table = 'fleet_mission'
@@ -44,3 +48,13 @@ class MissionTypeModel(models.Model):
 
     class Meta:
         db_table = 'fleet_mission_type'
+
+
+@receiver(post_save, sender=MissionModel)
+def mission_model_save_callback(sender, **kwargs):
+    obj = kwargs.get('instance', None)
+    robot_sn = obj.robot.sn
+
+    msg = {
+
+    }

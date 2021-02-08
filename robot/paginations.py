@@ -3,8 +3,8 @@ from rest_framework.response import Response
 from collections import OrderedDict
 
 
-class MissionPagination(PageNumberPagination):
-    page_size = 5
+class RobotPagination(PageNumberPagination):
+    page_size = 10
     page_size_query_param = 'pageSize'
     page_query_param = 'current'
     max_page_size = 100
